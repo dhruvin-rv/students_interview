@@ -1,0 +1,6 @@
+export enum PAYLOAD_RESPONSE_STATUS {
+  SUCCESS = 1,
+  FAILED = 0,
+  WARNING = 3,
+  ERROR = 4,
+}
