@@ -18,6 +18,11 @@ export class Student {
   readonly lastName: string;
   @Column({ unique: true })
   readonly email: string;
+
+  /**Address id of the user
+   *Here we assume that we will not search user's by the address in future so
+   * created Uni-directional relation
+   */
   @OneToOne(() => Address)
   @JoinColumn()
   address: Address;

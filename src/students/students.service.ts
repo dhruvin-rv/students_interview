@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Student } from './entities/student.entity';
 import { Repository } from 'typeorm';
 import { Address } from './entities/student_address.entity';
-import { CreateStudentDto } from './dto/student.dto';
+import { CreateStudentDto, UpdateStudentDto } from './dto/student.dto';
 @Injectable()
 export class StudentsService {
   constructor(
@@ -13,24 +13,22 @@ export class StudentsService {
     private readonly StudentAddressTable: Repository<Address>,
   ) {}
 
-  async getSingleStudent(email: string) {
-    const student = await this.StudentTable.findOne({
+  async getStudent(email?: string): Promise<Student[]> {
+    if (!email) {
+      const student = await this.StudentTable.find();
+      return student;
+    }
+    const student = await this.StudentTable.find({
       where: { email: email },
     });
-    if (student) {
-      return true;
-    } else {
-      return false;
-    }
+    return student;
   }
+
   async createStudent(data: CreateStudentDto) {
-    const { email, firstName, lastName, address } = data;
-    const createAddress = this.StudentAddressTable.create(address);
+    const createAddress = this.StudentAddressTable.create(data.address);
     await this.StudentAddressTable.insert(createAddress);
     const createStudent = this.StudentTable.create({
-      email,
-      firstName,
-      lastName,
+      ...data,
       address: createAddress,
     });
     const create = await this.StudentTable.insert(createStudent);
@@ -40,4 +38,6 @@ export class StudentsService {
       return false;
     }
   }
+
+  async updateStudent(data: UpdateStudentDto) {}
 }

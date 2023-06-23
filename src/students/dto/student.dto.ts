@@ -4,6 +4,7 @@ import {
   IsEmail,
   IsNumber,
   ValidateNested,
+  IsOptional,
 } from 'class-validator';
 import { Type } from 'class-transformer';
 
@@ -39,4 +40,43 @@ export class CreateStudentDto {
   @ValidateNested()
   @Type(() => Address)
   readonly address: Address;
+}
+
+export class GetStudentDto {
+  @IsOptional()
+  @IsEmail()
+  readonly email?: string;
+}
+
+class UpdateAddress {
+  @IsOptional()
+  @IsString()
+  readonly address?: string;
+  @IsOptional()
+  @IsString()
+  readonly city?: string;
+  @IsOptional()
+  @IsString()
+  readonly state?: string;
+  @IsOptional()
+  @IsString()
+  readonly country?: string;
+  @IsOptional()
+  @IsNumber()
+  readonly pincode?: number;
+}
+export class UpdateStudentDto {
+  @IsOptional()
+  @IsEmail()
+  readonly email?: string;
+  @IsOptional()
+  @IsString()
+  readonly firstName?: string;
+  @IsOptional()
+  @IsString()
+  readonly lastName?: string;
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => UpdateAddress)
+  readonly address?: UpdateAddress;
 }
