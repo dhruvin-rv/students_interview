@@ -5,11 +5,11 @@ import {
   OneToOne,
   JoinColumn,
 } from 'typeorm';
-import { Address } from './student_address.entity';
+import { Address } from './employee_address.entity';
 import { ENTITY } from 'src/common/enums/entity.enum';
 
 @Entity({ name: ENTITY.STUDENT })
-export class Student {
+export class Employee {
   @PrimaryGeneratedColumn()
   readonly id: number;
   @Column()
@@ -20,10 +20,15 @@ export class Student {
   readonly email: string;
 
   /**Address id of the user
-   *Here we assume that we will not search user's by the address in future so
+   * Here we assume that we will not search user's by the address in future so
    * created Uni-directional relation
    */
-  @OneToOne(() => Address)
+  @OneToOne(() => Address, {
+    // cascade: true,
+    eager: true,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
   @JoinColumn()
-  address: Address;
+  readonly address: Address;
 }

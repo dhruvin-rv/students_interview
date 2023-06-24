@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { StudentsModule } from './students/students.module';
+import { EmployeesModule } from './employees/employees.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from '@hapi/joi';
@@ -25,8 +25,9 @@ import * as Joi from '@hapi/joi';
       database: process.env.DB_DATABASE,
       autoLoadEntities: true,
       synchronize: true,
+      logging: 'all',
     }),
-    StudentsModule,
+    EmployeesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
