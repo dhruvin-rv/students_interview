@@ -25,9 +25,9 @@
 
 ```json
 {
-  "status": number,
+  "status": "number",
   "message": "response message",
-  "data": {},
-  "error": {}
+  "data": "object, array, null",
+  "error": "object, array, null"
 }
 ```
