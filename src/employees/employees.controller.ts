@@ -20,7 +20,12 @@ import {
 import { Response } from 'express';
 import { PAYLOAD_RESPONSE_STATUS } from 'src/common/enums/payload.enum';
 import { ApiTags, ApiOperation, ApiOkResponse } from '@nestjs/swagger';
-import { CreateEmployResponse } from './response/employee.response';
+import {
+  CreateEmployResponse,
+  DeleteEmployResponse,
+  GetEmployResponse,
+  UpdateEmployResponse,
+} from './response/employee.response';
 
 @ApiTags('Employees')
 @Controller('employee')
@@ -76,6 +81,10 @@ export class EmployeesController {
   }
 
   @Get()
+  @ApiOperation({
+    description: 'Get all employee',
+  })
+  @ApiOkResponse({ type: GetEmployResponse })
   async getAllEmployee(
     @Query() data: GetEmployeeDto,
     @Res() response: Response,
@@ -110,6 +119,10 @@ export class EmployeesController {
   }
 
   @Put()
+  @ApiOperation({
+    description: 'Update employee by employee id',
+  })
+  @ApiOkResponse({ type: UpdateEmployResponse })
   async updateEmployee(
     @Body() data: UpdateEmployeeDto,
     @Res() response: Response,
@@ -157,6 +170,10 @@ export class EmployeesController {
   }
 
   @Delete()
+  @ApiOperation({
+    description: 'Delete employee by employee id',
+  })
+  @ApiOkResponse({ type: DeleteEmployResponse })
   async deleteEmployee(
     @Res() response: Response,
     @Query() data: DeleteEmployeeDto,

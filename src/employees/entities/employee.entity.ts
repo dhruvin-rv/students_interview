@@ -8,7 +8,7 @@ import {
 import { Address } from './employee_address.entity';
 import { ENTITY } from 'src/common/enums/entity.enum';
 
-@Entity({ name: ENTITY.STUDENT })
+@Entity({ name: ENTITY.EMPLOYEE })
 export class Employee {
   @PrimaryGeneratedColumn()
   readonly id: number;

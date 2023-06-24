@@ -1,4 +1,4 @@
 export enum ENTITY {
-  STUDENT = 'employees',
+  EMPLOYEE = 'employees',
   ADDRESS = 'employee_addresses',
 }

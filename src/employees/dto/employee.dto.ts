@@ -55,7 +55,7 @@ export class CreateEmployeeDto {
 export class GetEmployeeDto {
   @IsOptional()
   @IsEmail()
-  @ApiProperty({ required: true })
+  @ApiProperty({ required: false })
   readonly email?: string;
 }
 
